@@ -1,4 +1,4 @@
-package com.microsoftwo.clother;
+package com.microsoftwo.clother.adviceBoard.query;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

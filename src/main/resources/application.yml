@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/clother
+    username: clotheruser
+    password: clotheruser
+
+
+logging:
+  level:
+    com:
+      microsoftwo:
+        clother:
+          adviceBoard:
+            query: debug
+
+
+
