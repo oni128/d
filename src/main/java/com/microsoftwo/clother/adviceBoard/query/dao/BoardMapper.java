@@ -11,4 +11,5 @@ public interface BoardMapper {
 
     List<BoardDTO> getBoards(@Param("sortBy") String sortBy);
 
+    BoardDTO getBoradById(@Param("id") int id);
 }

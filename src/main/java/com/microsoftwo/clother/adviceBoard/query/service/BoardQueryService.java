@@ -24,4 +24,9 @@ public class BoardQueryService {
         }
         return boardMapper.getBoards(sortBy);
     }
+
+    public BoardDTO getBoardById(int id) {
+        return boardMapper.getBoradById(id);
+    }
+
 }
