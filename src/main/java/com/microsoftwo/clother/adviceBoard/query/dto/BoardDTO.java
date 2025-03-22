@@ -14,6 +14,8 @@ public class BoardDTO {
     private String imageUrl;            // 사진 url
     private String content;             // 내용
     private String userId;              // 작성자
-    private boolean isDeleted;
+    private boolean isDeleted;          // 삭제여부
     private LocalDateTime createdAt;    // 작성날짜
+    private int likeCount;             // 좋아요 수
+    private int commentCount;          // 댓글 수
 }

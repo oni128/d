@@ -19,7 +19,7 @@ public class BoardQueryService {
 
     public List<BoardDTO> getBoards(String sortBy) {
         // 기본값: 최신순
-        if (!"likes".equals(sortBy)) {
+        if (!"like".equals(sortBy)) {
             sortBy = "created_at";
         }
         return boardMapper.getBoards(sortBy);
