@@ -20,8 +20,8 @@ public class BoardCommandController {
 
     //게시글 등록
     @PostMapping("/create")
+    // ResponseEntity -- Spring에서 HTTP 응답을 생성하는 객체
     public ResponseEntity<BoardRequestDTO> createBoard(@RequestBody BoardRequestDTO request ) {
-//        System.out.println("게시글 등록 요청이 들어옴!");
 //        log.debug(" 게시글 등록 요청: userId={}, title={}, content={} ", request.getUserId(), request.getTitle(), request.getContent());
 
         BoardRequestDTO savedBoard = boardCommandService.createBoard(request.getUserId(),request.getTitle(),request.getContent()

@@ -38,13 +38,10 @@ public class BoardCommandServiceImpl implements BoardCommandService {
         boardEntity.setUserId(userId);
         boardEntity.setTitle(title);
         boardEntity.setContent(content);
-//        boardEntity.setImageUrls(new ArrayList<>());
-
 
 
         // 게시글 저장
         BoardEntity savedEntity = boardCommandRepository.save(boardEntity);
-        log.info("✅ 게시글 저장 완료! 게시글 ID: {}", savedEntity.getId());
         // ✅ 이미지 저장 (리스트에서 하나씩 꺼내어 저장)
 //        if (imageUrl != null && order != null && imageUrl.size() == order.size()) {
 //            for (int i = 0; i < imageUrl.size(); i++) {
@@ -55,26 +52,17 @@ public class BoardCommandServiceImpl implements BoardCommandService {
 //                imageRepository.save(imageEntity);
 //            }
 //        }
-
-//        // ✅ 이미지 저장 (리스트에서 하나씩 꺼내어 저장)
-//        if (imagUrl != null) {
-//            for (BoardImageDTO dto : imageUrl) {
-//                ImageEntity imageEntity = new ImageEntity();
-//                imageEntity.setImageUrl(dto.getImageUrl());  // ✅ DTO에서 imageUrl 추출
-//                imageEntity.setOrder(dto.getOrder());        // ✅ DTO에서 order 추출
-//                imageEntity.setBoardId(savedEntity);          // 게시글과 연관관계 설정
-//                imageRepository.save(imageEntity);
-//            }
-//        }
         if (images != null) {
             for (BoardRequestDTO.BoardImageDTO dto : images) {
                 ImageEntity imageEntity = new ImageEntity();
                 imageEntity.setImageUrl(dto.getImageUrl());
                 imageEntity.setOrder(dto.getOrder());
-                imageEntity.setBoardId(savedEntity);
-                savedEntity.addImage(imageEntity);  // ✅ 양방향 연관관계 설정?
+                imageEntity.setBoardId(savedEntity);    // 연관관계 설정 -- imageEntity가 어느 BoardEntity에 속하는지 설정
+                savedEntity.addImage(imageEntity);
+                // 양방향 연관관계 설정 -- savedEntity(BoardEntity)에도 imageEntity를 추가하여 객체 관계 동기화
+                // addImage() -- BoardEntity 내부에서 List<ImageEntity>에 추가하는 역할
                 imageRepository.save(imageEntity);
-                log.info("✅ 이미지 저장: imageUrl={}, order={}", imageEntity.getImageUrl(), imageEntity.getOrder());
+                log.debug("✅ 이미지 저장: imageUrl={}, order={}", imageEntity.getImageUrl(), imageEntity.getOrder());
             }
         } else {
             log.warn("🚨 저장할 이미지가 없습니다.");
@@ -85,9 +73,8 @@ public class BoardCommandServiceImpl implements BoardCommandService {
 
 
         // 저장된 Entity를 DTO로 변환해서 반환
-//        return new PostRequestDTO(savedEntity.getId(), savedEntity.getTitle(), savedEntity.getContent());
+        // 트랜잭션 종료 시점(commit)
         return BoardRequestDTO .fromEntity(savedEntity);
-//        return null;
     }
 
 }

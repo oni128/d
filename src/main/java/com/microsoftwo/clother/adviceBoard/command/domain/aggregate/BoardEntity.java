@@ -41,7 +41,7 @@ public class BoardEntity {
     @Column(nullable = false)
     private int commentCount = 0;
 
-    @OneToMany(mappedBy = "boardId", cascade = CascadeType.ALL, orphanRemoval = true) // ✅ 게시물과 1:N 관계 설정
+    @OneToMany(mappedBy = "boardId", cascade = CascadeType.ALL, orphanRemoval = true) // ImageEntity에 boardId 필드와 매핑
     private List<ImageEntity> images = new ArrayList<>();
 
     public List<ImageEntity> getImages() {
@@ -50,9 +50,9 @@ public class BoardEntity {
 
     // ✅ 이미지 리스트 추가 메서드
     public void addImage(ImageEntity image) {
-        if (images == null) {
-            images = new ArrayList<>();
-        }
+//        if (images == null) {
+//            images = new ArrayList<>();
+//        }
         images.add(image);
         image.setBoard(this);  // ✅ 양방향 연관관계 설정
     }
