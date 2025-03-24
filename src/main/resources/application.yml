@@ -5,19 +5,22 @@ spring:
     username: clotheruser
     password: clotheruser
 
-server:
-  servlet:
-    context-path: /
+#server:
+#  servlet:
+#    context-path: /
 
 
 
 
 logging:
   level:
+    root: info  # 전체 기본 로그 레벨
     com:
       microsoftwo:
         clother:
           adviceBoard:
             query: debug
+            command: debug
+
 
 

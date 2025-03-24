@@ -11,11 +11,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/boards")
-@Data
 @Slf4j
 public class BoardQueryController {
 
     private final BoardQueryService boardQueryService;
+
+    public BoardQueryController(BoardQueryService boardQueryService) {
+        this.boardQueryService = boardQueryService;
+    }
 
     // 게시판 조회
     @GetMapping

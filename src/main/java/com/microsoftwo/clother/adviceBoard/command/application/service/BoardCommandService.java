@@ -1,27 +1,12 @@
 package com.microsoftwo.clother.adviceBoard.command.application.service;
 
-import com.microsoftwo.clother.adviceBoard.command.application.dto.BoardCommandDTO;
-import com.microsoftwo.clother.adviceBoard.command.domain.aggregate.BoardEntity;
-import com.microsoftwo.clother.adviceBoard.command.domain.repository.BoardCommandRepository;
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-@Data
-public class BoardCommandService {
+import com.microsoftwo.clother.adviceBoard.command.application.dto.BoardRequestDTO;
 
-    private final BoardCommandRepository boardCommandRepository;
+import java.util.List;
 
-    @Autowired
-    public BoardCommandService(BoardCommandRepository boardCommandRepository) {
-        this.boardCommandRepository = boardCommandRepository;
-    }
+public interface BoardCommandService {
+    BoardRequestDTO createBoard(int userId, String title, String content, List<BoardRequestDTO.BoardImageDTO> images);
 
-
-    public BoardCommandDTO createBoard(BoardCommandDTO boardCommandDTO) {
-        BoardEntity boardEntity = boardCommandDTO.toEntity();
-        BoardEntity savedEntity = boardCommandRepository.save(boardEntity);
-        return BoardCommandDTO.fromEntity(savedEntity);
-    }
+//    BoardRequestDTO createBoard(int userId, String title, String content, List<BoardImageDTO> imageUrl, List<BoardImageDTO> order);
 }
