@@ -1,8 +1,9 @@
 package com.microsoftwo.clother.adviceBoard.command.application.controller;
 
 import com.microsoftwo.clother.adviceBoard.command.application.dto.BoardCommandDTO;
-import com.microsoftwo.clother.adviceBoard.command.application.dto.PostRequestDTO;
 import com.microsoftwo.clother.adviceBoard.command.application.service.BoardCommandService;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ public class BoardCommandController {
 
     private final BoardCommandService boardService;
 
+    @Autowired
     public BoardCommandController(BoardCommandService boardService) {
         this.boardService = boardService;
     }

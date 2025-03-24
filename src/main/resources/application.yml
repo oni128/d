@@ -5,6 +5,12 @@ spring:
     username: clotheruser
     password: clotheruser
 
+server:
+  servlet:
+    context-path: /
+
+
+
 
 logging:
   level:
@@ -13,6 +19,5 @@ logging:
         clother:
           adviceBoard:
             query: debug
-
 
 

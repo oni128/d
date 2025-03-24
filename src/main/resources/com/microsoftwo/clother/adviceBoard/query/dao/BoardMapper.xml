@@ -57,7 +57,7 @@
             a.created_at,
             a.is_deleted,
             -- 모든 이미지 (쉼표로 연결)
-            GROUP_CONCAT(i.image_url ORDER BY i.order SEPARATOR ', ') AS image_urls,
+            GROUP_CONCAT(i.image_url ORDER BY i.order SEPARATOR ', ') AS image_url,
             a.like_count,
             a.comment_count
         FROM advice_board a
@@ -66,6 +66,41 @@
           AND a.id = #{id}  -- 특정 id 조건 추가
         GROUP BY a.id, a.user_id, a.title, a.content, a.created_at, a.is_deleted, a.like_count, a.comment_count;
 
+    </select>
+
+    <!-- 검색 (제목순,내용순, 제목+내용순-default) + 최신순 -->
+    <select id="searchBoards" resultMap="BoardResultMap">
+
+        SELECT
+            a.id AS board_id,
+            a.user_id,
+            a.title,
+            a.content,
+            a.created_at,
+            a.is_deleted,
+            -- 대표 이미지 (첫 번째 이미지)
+            (SELECT i2.image_url
+             FROM advice_board_image i2
+             WHERE i2.board_id = a.id
+             ORDER BY i2.order ASC
+                    LIMIT 1) AS image_url,
+            a.like_count,
+            a.comment_count
+
+        FROM
+            advice_board a
+        WHERE
+            a.is_deleted = FALSE
+          AND (
+            (#{sortBy} = 'title' AND a.title LIKE CONCAT('%', #{keyword}, '%'))
+           OR (#{sortBy} = 'content' AND a.content LIKE CONCAT('%', #{keyword}, '%'))
+           OR (#{sortBy} = 'title+content'
+          AND (a.title LIKE CONCAT('%', #{keyword}, '%')
+           OR a.content LIKE CONCAT('%', #{keyword}, '%')))
+         --  OR (@searchType IS NULL OR @searchType = '') -- 검색어가 없으면 전체 조회
+            )
+        ORDER BY
+            a.created_at DESC;
     </select>
 
 </mapper>
