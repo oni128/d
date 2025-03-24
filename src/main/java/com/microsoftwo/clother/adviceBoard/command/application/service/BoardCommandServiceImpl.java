@@ -38,25 +38,12 @@ public class BoardCommandServiceImpl implements BoardCommandService {
         boardEntity.setUserId(userId);
         boardEntity.setTitle(title);
         boardEntity.setContent(content);
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 93bad1a (임시 커밋)
 
 
         // 게시글 저장
         BoardEntity savedEntity = boardCommandRepository.save(boardEntity);
-        // ✅ 이미지 저장 (리스트에서 하나씩 꺼내어 저장)
-//        if (imageUrl != null && order != null && imageUrl.size() == order.size()) {
-//            for (int i = 0; i < imageUrl.size(); i++) {
-//                ImageEntity imageEntity = new ImageEntity();
-//                imageEntity.setImageUrl(imageUrl.get(i));  // ✅ String 타입 맞춤
-//                imageEntity.setOrder(order.get(i));        // ✅ int 타입 맞춤
-//                imageEntity.setBoardId(boardEntity);  // 게시글과 연관관계 설정
-//                imageRepository.save(imageEntity);
-//            }
-//        }
+
+        // 이미지 저장 (리스트에서 하나씩 꺼내어 저장)
         if (images != null) {
             for (BoardRequestDTO.BoardImageDTO dto : images) {
                 ImageEntity imageEntity = new ImageEntity();
@@ -67,17 +54,15 @@ public class BoardCommandServiceImpl implements BoardCommandService {
                 // 양방향 연관관계 설정 -- savedEntity(BoardEntity)에도 imageEntity를 추가하여 객체 관계 동기화
                 // addImage() -- BoardEntity 내부에서 List<ImageEntity>에 추가하는 역할
                 imageRepository.save(imageEntity);
-                log.debug("✅ 이미지 저장: imageUrl={}, order={}", imageEntity.getImageUrl(), imageEntity.getOrder());
             }
         } else {
             log.warn("🚨 저장할 이미지가 없습니다.");
         }
 
-        // ✅ 게시글 엔티티를 다시 저장 (연관관계 반영)
+        // 게시글 엔티티를 다시 저장 (연관관계 반영)
         boardCommandRepository.save(savedEntity);
 
 
-        // 저장된 Entity를 DTO로 변환해서 반환
         // 트랜잭션 종료 시점(commit)
         return BoardRequestDTO .fromEntity(savedEntity);
     }

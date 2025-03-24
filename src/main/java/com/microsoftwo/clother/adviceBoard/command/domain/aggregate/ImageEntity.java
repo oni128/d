@@ -32,18 +32,11 @@ public class ImageEntity {
         this.boardId = boardId;
     }
 
-//    public BoardRequestDTO.BoardImageDTO toDto() {
-//        return BoardRequestDTO.BoardImageDTO.builder()
-//                .id(this.id)
-//                .boardId(this.boardId.getId()) // board 엔티티가 null이 아닌지 확인 필요
-//                .imageUrl(this.imageUrl)
-//                .order(this.order)
-//                .build();
-//    }
+
     public BoardRequestDTO.BoardImageDTO toDto() {
         return BoardRequestDTO.BoardImageDTO.builder()
                 .id(this.id)
-                .boardId(this.boardId != null ? this.boardId.getId() : 0) // null 체크,  ✅ board가 null이 아닐 때만 접근
+                .boardId(this.boardId != null ? this.boardId.getId() : 0) // board가 null이 아닐 때만 접근
                 .imageUrl(this.imageUrl)
                 .order(this.order)
                 .build();

@@ -6,7 +6,6 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,29 +27,21 @@ public class BoardRequestDTO {
     private int commentCount;
     private List<BoardImageDTO> images;
 
-/* 왜 필요가 없을까?*/
-//    public BoardRequestDTO(int userId, String title, String content, List<BoardImageDTO> images) {
-//        this.userId = userId;
-//        this.title = title;
-//        this.content = content;
-//        this.images = images;
-//    }
 
     public static BoardRequestDTO fromEntity(BoardEntity entity) {
         if (entity == null) {
             throw new IllegalArgumentException("BoardEntity가 null입니다.");
         }
-        log.info("✅ fromEntity 호출됨! 게시글 ID: {}", entity.getId());
 
-        List<BoardRequestDTO.BoardImageDTO> imageDTOs = new ArrayList<>();
-        if (entity.getImages() != null) {
-            log.info("✅ entity.getImages() 개수: {}", entity.getImages().size());
-            imageDTOs = entity.getImages().stream()
-                    .map(ImageEntity::toDto)
-                    .collect(Collectors.toList());
-        } else {
-            log.warn("🚨 entity.getImages()가 null 입니다!");
-        }
+//        List<BoardRequestDTO.BoardImageDTO> imageDTOs = new ArrayList<>();
+//        if (entity.getImages() != null) {
+//            log.info("✅ entity.getImages() 개수: {}", entity.getImages().size());
+//            imageDTOs = entity.getImages().stream()
+//                    .map(ImageEntity::toDto)
+//                    .collect(Collectors.toList());
+//        } else {
+//            log.warn("🚨 entity.getImages()가 null 입니다!");
+//        }
 
 
         return BoardRequestDTO.builder()
