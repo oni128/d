@@ -38,6 +38,11 @@ public class BoardCommandServiceImpl implements BoardCommandService {
         boardEntity.setUserId(userId);
         boardEntity.setTitle(title);
         boardEntity.setContent(content);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 93bad1a (임시 커밋)
 
 
         // 게시글 저장

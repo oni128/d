@@ -26,25 +26,15 @@ public class BoardRequestDTO {
     private Boolean isDeleted;
     private int likeCount;
     private int commentCount;
-//    private List<BoardImageDTO> imageUrl;
-//    private List<BoardImageDTO> order;
     private List<BoardImageDTO> images;
 
-//    public BoardRequestDTO(int userId, String title, String content, List<BoardImageDTO> imageUrl, List<BoardImageDTO> order) {
+/* 왜 필요가 없을까?*/
+//    public BoardRequestDTO(int userId, String title, String content, List<BoardImageDTO> images) {
 //        this.userId = userId;
 //        this.title = title;
 //        this.content = content;
-//        this.imageUrl = imageUrl;
-//        this.order = order;
+//        this.images = images;
 //    }
-
-
-    public BoardRequestDTO(int userId, String title, String content, List<BoardImageDTO> images) {
-        this.userId = userId;
-        this.title = title;
-        this.content = content;
-        this.images = images;
-    }
 
     public static BoardRequestDTO fromEntity(BoardEntity entity) {
         if (entity == null) {
