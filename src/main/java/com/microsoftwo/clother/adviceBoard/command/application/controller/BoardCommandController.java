@@ -18,18 +18,39 @@ public class BoardCommandController {
         this.boardCommandService = boardCommandService;
     }
 
-    //게시글 등록
-    @PostMapping("/create")
+    // 게시물 등록
+    @PostMapping("/board")
     // ResponseEntity -- Spring에서 HTTP 응답을 생성하는 객체
     public ResponseEntity<BoardRequestDTO> createBoard(@RequestBody BoardRequestDTO request ) {
 
         BoardRequestDTO savedBoard = boardCommandService.createBoard(request.getUserId(),request.getTitle(),request.getContent()
-                                                                        ,request.getImages());
+                ,request.getImages());
 //        for (BoardRequestDTO.BoardImageDTO dto : request.getImages()) {
 //            log.info("저장 중: imageUrl={}, order={}", dto.getImageUrl(), dto.getOrder());
 //        }
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBoard);
     }
+
+
+    // 게시물 수정
+    @PatchMapping("/{Postid}")
+    public ResponseEntity<BoardRequestDTO> updateBoard(
+            @PathVariable int Postid,
+            @RequestBody BoardRequestDTO request) {
+
+        BoardRequestDTO updated = boardCommandService.updateBoard(Postid, request);
+        return ResponseEntity.ok(updated);
+    }
+
+
+    // 게시물 삭제
+    @DeleteMapping("/{boardId}")
+    public ResponseEntity<String> deleteBoard(@PathVariable int boardId) {
+        boardCommandService.deleteBoard(boardId);
+//        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("게시물이 삭제되었습니다.");
+    }
+
 }
 
 

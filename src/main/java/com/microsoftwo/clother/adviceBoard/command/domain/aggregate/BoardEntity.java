@@ -45,16 +45,16 @@ public class BoardEntity {
     private List<ImageEntity> images = new ArrayList<>();
 
     public List<ImageEntity> getImages() {
-        return images == null ? new ArrayList<>() : images; // ✅ null 방지
+        return images == null ? new ArrayList<>() : images; // null 방지
     }
 
-    // ✅ 이미지 리스트 추가 메서드
+    // 이미지 리스트 추가 메서드
     public void addImage(ImageEntity image) {
 //        if (images == null) {
 //            images = new ArrayList<>();
 //        }
         images.add(image);
-        image.setBoard(this);  // ✅ 양방향 연관관계 설정
+        image.setBoard(this);  // 양방향 연관관계 설정
     }
 
     @PrePersist

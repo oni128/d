@@ -35,12 +35,12 @@ public class BoardRequestDTO {
 
 //        List<BoardRequestDTO.BoardImageDTO> imageDTOs = new ArrayList<>();
 //        if (entity.getImages() != null) {
-//            log.info("✅ entity.getImages() 개수: {}", entity.getImages().size());
+//            log.info(" entity.getImages() 개수: {}", entity.getImages().size());
 //            imageDTOs = entity.getImages().stream()
 //                    .map(ImageEntity::toDto)
 //                    .collect(Collectors.toList());
 //        } else {
-//            log.warn("🚨 entity.getImages()가 null 입니다!");
+//            log.warn(" entity.getImages()가 null 입니다!");
 //        }
 
 
@@ -85,10 +85,5 @@ public class BoardRequestDTO {
         private String imageUrl;
         private int order;
 
-        public BoardImageDTO(int boardId, String imageUrl, int order) {
-            this.boardId = boardId;
-            this.imageUrl = imageUrl;
-            this.order = order;
-        }
     }
 }

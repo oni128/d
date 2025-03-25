@@ -27,7 +27,7 @@ public class ImageEntity {
     @Column(name = "`order`", nullable = false)
     private int order;
 
-    // ✅ setBoard 메서드 추가 (양방향 연관관계 설정)
+    //  setBoard 메서드 추가 (양방향 연관관계 설정)
     public void setBoard(BoardEntity boardId) {
         this.boardId = boardId;
     }
